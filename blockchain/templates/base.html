@@ -1,0 +1,88 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de cuentas: {{ pageTitle }}</title>
+    <link rel="stylesheet" href="/static/css/pico.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+</head>
+<body>
+    <header>
+        <div class="container">
+            APP WEB COMPRA Y VENTA DE CRIPTOMONEDAS
+        </div>
+    </header>
+    <nav class="container">
+        <ul>
+            <li>
+                {% if puntero == "index.html" %}
+              
+                <span>Inicio</span> |         
+            </li>
+            <li>
+                <a href="/purchase">Compra</a> |
+            </li>
+            <li>
+                <a href="/status">Status</a>
+            </li>
+        </ul>
+        {% endif %}
+    </nav>
+
+    <nav class="container">
+        <ul>
+            <li>
+                {% if puntero == "purchase.html" %}
+
+                <a href="/">Inicio</a> |     
+            </li>
+            <li>
+                <span>Compra</span> |   
+            </li>
+            <li>
+                <a href="/status">Status</a>
+            </li>
+        </ul>
+        {% endif %}
+    </nav>
+
+    <nav class="container">
+        <ul>
+            <li>
+                {% if puntero == "status.html" %}
+
+                <a href="/">Inicio</a> |      
+            </li>
+            <li>
+                <a href="/purchase">Compra</a> |
+            </li>
+            <li>
+                <span>Status</span>  
+            </li>
+        </ul>
+
+        {% endif %}
+    </nav>
+
+    <section class="container">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}    
+        <article class="messages">
+            {% for msg in messages %}
+            <p class="error">{{ msg }}</p>
+            {% endfor%}
+        </article>
+        {% endif %}
+        {% endwith %}
+
+       {% block content %}{% endblock %}
+    </section>
+    <footer>
+        <div class="container">
+            &copy; 2023 - Manuel Cazalla (Todos los derechos reservados)
+        </div>
+    </footer>
+</body>
+</html>

@@ -17,3 +17,5 @@ apikey = "774747848hhfhf"
 pip install -r requirements.txt
 ```
 - Las librerias utilizadas son request,pytest y flask
+## Base de datos
+- Crear base de datos movimientos utilizando movimientos_create que se encuentra en el directorio data.
