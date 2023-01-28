@@ -4,9 +4,10 @@ from wtforms.validators import DataRequired,ValidationError,NumberRange
 
 monedas_disponibles = ["EUR", "BTC", "SOL", "XRP", "ETH","BNB","ADA","DOT","MATIC","USDT"]
 
-def validar_moneda(form,field):
-    if field.data == form.moneda_from.data:
-         raise ValidationError(message="Elige diferntes tipos de monedas")
+def validar_moneda(field,form):
+   if field.data == form.moneda_from.data:
+         raise ValidationError(message="Debes elegir diferentes tipos de moneda diferentes")
+    
     
 
 
@@ -23,6 +24,9 @@ class MovementForm(FlaskForm):
  
     cantidad_from = FloatField("Q:  ",validators=[DataRequired(message="La cantidad tiene que ser un número positivo y mayor que 0"),
     NumberRange(min=0.00001, max=99999999)])
+    
+    
+            
 
 
     consultar = SubmitField("Calcular")
