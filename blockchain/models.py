@@ -4,31 +4,30 @@ import sqlite3
 
 
 class conecSqlite :
-     def __init__(self, ruta):
-        self.ruta = ruta
+     def __init__(self,ORIGIN_DATA):
+        self.ruta = ORIGIN_DATA
 
-     def consultaSqlite(self, consulta):
-            conexion = sqlite3.connect(self.ruta)
-            cursor = conexion.cursor()
-            cursor.execute(consulta)
+     def consultaSqlite(self,consulta):
+            con = sqlite3.connect(self.ruta)
+            cur = con.cursor()
+            cur.execute(consulta)
 
-            self.movimientos = []
-            nombres_columnas = []
+            resultado = []
+            columnas = cur.description
 
-            for desc_columna in cursor.description:
-                nombres_columnas.append(desc_columna[0])
 
-            datos = cursor.fetchall()
-            for dato in datos:
+            filas = cur.fetchall()
+            for dato in filas:
                 movimiento = {}
-                indice = 0
-                for nombre in nombres_columnas:
-                    movimiento[nombre] = dato[indice]
-                    indice += 1
-                self.movimientos.append(movimiento)
-            conexion.close()
+                posicion = 0
+                
+                for nombre in columnas:
+                    movimiento[nombre[0]] = dato[posicion]
+                    posicion += 1
+                resultado.append(movimiento)
+            con.close()
 
-            return self.movimientos
+            return resultado
     
     
      def consultaConParametros(self, consulta, params):
@@ -100,9 +99,9 @@ class APIError(Exception):
         super().__init__(msg)
 
 class Consulta_monedas :
-    def __init__(self,moneda_from,moneda_to) :
-        self.moneda_from = moneda_from
-        self.moneda_to = moneda_to
+    def __init__(self,origen,destino) :
+        self.moneda_from = origen
+        self.moneda_to = destino
         self.cambio = 0.0
        
         

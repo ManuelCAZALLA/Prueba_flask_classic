@@ -3,22 +3,25 @@ from flask import render_template,request, redirect, url_for, flash
 from blockchain.models import *
 from blockchain.forms import MovementForm
 from datetime import date,datetime
+from config import *
 
 
 
-RUTA = "data/movimientos.sqlite"
+
 
 @app.route("/")
 def index():
     try:
-        sqlite = conecSqlite(RUTA)
-        movimientos = sqlite.consultaSqlite("SELECT * FROM movimientos.sqlite ORDER BY date")
-        return render_template("index.html",movements = movimientos, puntero = "index.html")
+        sqlite = conecSqlite(ORIGIN_DATA)
+        movimientos = sqlite.consultaSqlite("SELECT * from movimientos")
+        return render_template("index.html",movements=  movimientos, puntero = "index.html",pageTitle ="movimimentos")
         
     except:
         flash("Base de datos no disponible,intentelo más tarde por favor",
               category="fallo")
-    return render_template("index.html")
+        return render_template("index.html")
+
+
 
 @app.route("/purchase",methods =["GET","POST"])
 def comprar ():
@@ -32,15 +35,15 @@ def comprar ():
             moneda_from = form.moneda_from.data
             moneda_to = form.moneda_to.data
             cantidad_from = form.cantidad_from.data
-            cantidad_from = float(round(cantidad_from, 8))
+            cantidad_from = float(round(cantidad_from,8))
 
             convertir = Consulta_monedas(moneda_from, moneda_to)
             PU = convertir.consulta_cambio()
-            PU = float(round(PU, 8))
+            PU = float(round(PU,8))
             cantidad_to = cantidad_from * PU
-            cantidad_to = float(round(cantidad_to, 8))
+            cantidad_to = float(round(cantidad_to,8))
 
-            saldo = conecSqlite(RUTA).calcular_saldo(moneda_from)
+            saldo = conecSqlite(ORIGIN_DATA).calcular_saldo(moneda_from)
             if moneda_from != "EUR" and saldo < float(cantidad_from):
                 flash(f"No tienes suficientes monedas {moneda_from} ")
                 return render_template("purchase.html", form=form)
@@ -55,7 +58,7 @@ def comprar ():
         if form.aceptar.data:
             if form.validate():
                 form = MovementForm(data=request.form)
-                sqlite = conecSqlite(RUTA)
+                sqlite = conecSqlite(ORIGIN_DATA)
                 consulta = "INSERT INTO movimientos (date, time, moneda_from, cantidad_from, moneda_to, cantidad_to) VALUES (?,?,?,?,?,?)"
                 moneda_from = str(form.moneda_from.data)
                 moneda_to = str(form.moneda_to.data)
@@ -80,4 +83,11 @@ def comprar ():
 
         else:
             return redirect(url_for("comprar"))
+        
+@app.route("/status",methods = ["GET","POST"])
+def estado():
+    
+    return ("Esto es el estado")
+
+  
 
