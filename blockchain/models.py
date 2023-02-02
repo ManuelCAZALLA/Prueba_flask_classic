@@ -103,6 +103,7 @@ class Consulta_monedas :
         self.moneda_from = origen
         self.moneda_to = destino
         self.cambio = 0.0
+        
        
         
     def consulta_cambio(self):
@@ -119,15 +120,10 @@ class Consulta_monedas :
         else:
             raise APIError(respuesta.status_code)
                     
-class Cambio :
-    def __init__(self,mon_digital) :
-       
-        self.mon_digital = mon_digital
-        self.rate = None
-        self.time = None
+
     
     def actualizar_cambio (self,apikey) :
-     r = requests.get(f"https://rest.coinapi.io/v1/exchangerate/{self.mon_digital}/EUR?apikey={apikey}")
+     r = requests.get(f"https://rest.coinapi.io/v1/exchangerate/{self.moneda_from}/EUR?apikey={apikey}")
      resultado = r.json()  
      if r.status_code == 200:
         self.rate = resultado ['rate'] 

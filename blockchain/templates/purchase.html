@@ -2,7 +2,8 @@
 
 {% block section %}
 
-<article>
+
+<article data-theme="dark">
     <table>
     <div class = "h1">    
     <h2>COMPRA DE CRIPTOS</h2>
@@ -11,7 +12,7 @@
             {{ form.csrf_token }}
 
         <div class="grid">
-            <div class="coin_from">
+            <div class="moneda_from">
             {{ form.moneda_from.label }}
             {{ form.moneda_from }}        
             {% if form.moneda_from.errors %}
@@ -21,7 +22,7 @@
             {% endif %}
             </div>
             
-            <div class="coin_to">
+            <div class="moneda_to">
             {{ form.moneda_to.label }}
             {{ form.moneda_to }}
             {% if form.moneda_to.errors %}

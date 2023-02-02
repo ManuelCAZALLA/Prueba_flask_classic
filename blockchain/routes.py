@@ -27,7 +27,7 @@ def index():
 def comprar ():
     if request.method == "GET":
         form = MovementForm()
-        return render_template("purchase.html", form=form, puntero="purchase.html")
+        return render_template("purchase.html", form=form, puntero="purchase.html",pageTitle = "Comprar")
     else:
         try:
             form = MovementForm(data=request.form)
@@ -39,7 +39,7 @@ def comprar ():
 
             convertir = Consulta_monedas(moneda_from, moneda_to)
             PU = convertir.consulta_cambio()
-            PU = float(round(PU,8))
+            PU = float (round(PU,8))
             cantidad_to = cantidad_from * PU
             cantidad_to = float(round(cantidad_to,8))
 
@@ -86,8 +86,23 @@ def comprar ():
         
 @app.route("/status",methods = ["GET","POST"])
 def estado():
-    
-    return ("Esto es el estado")
-
   
+    
+        sqlite = conecSqlite(ORIGIN_DATA)
+        euros_to = sqlite.consultar_saldo("SELECT sum(cantidad_to) FROM movimientos WHERE moneda_to='EUR'")
+        euros_to = euros_to[0]
+        if euros_to == None:
+            euros_to = 0
+        euros_from = sqlite.consultar_saldo("SELECT sum(cantidad_from) FROM movimientos WHERE moneda_from='EUR'")
+        euros_from = euros_from[0]
+        if euros_from == None:
+            euros_from = 0
+        saldo_euros_invertidos = euros_from - euros_to 
+        saldo_euros_invertidos = round(saldo_euros_invertidos, 8)
+        total_euros_invertidos = euros_from
+        recuperado = euros_to
 
+        cripto_from = sqlite.total_euros_invertidos("SELECT moneda_from, sum(cantidad_from) FROM movimientos GROUP BY moneda_from")
+        totales_from = []
+       
+       
