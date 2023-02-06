@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 
 {% block section %}
-
-
 <article data-theme="dark">
     <table>
     <div class = "h1">    
@@ -34,7 +32,7 @@
         </div>
 
         <div class="grid"> 
-            <div class="quantity_from">
+            <div class="quantity_from" >
             {{ form.cantidad_from.label }}
             {{ form.cantidad_from }}
             {% if form.cantidad_from.errors %}
@@ -50,10 +48,15 @@
                 <p class="paper-label"> {{ cantidad_to }}</p>
             </div>
         </div>
-
-        <div class="boton-consultar">
-            {{ form.consultar}}
-            </div>
+       
+        <div class = "boton-consultar">
+        <a href="consultar">
+            <span class="material-symbols-outlined">
+                {{ form.consultar}} 
+                </span>
+            </a>
+        </div>
+       
         
         <div class="grid">
             <div class="p.u">
@@ -62,13 +65,26 @@
             
             </div>
 
-        <div class="boton-cancelar-comprar">
+        <div class="boton-cancelar-compra">
+            <span class="material-symbols-outlined">
                 {{form.borrar }}
+                </span>
+                
             </div>
+            
+            <div class = "boton-comprar">
+            <a href="comprar">
+                <span class="material-symbols-outlined">
+                    
+                {{ form.aceptar }}
+                </span>
+            </a>
+                
+        </div>
+
     
-        <div class="boton-comprar">
-            {{ form.aceptar }}
-            </div>
+           
+           
      
     </form>
     </table>

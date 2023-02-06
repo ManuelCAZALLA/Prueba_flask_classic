@@ -25,10 +25,10 @@
                     <td>{{movement.date}}</td>
                     <td>{{movement.time}}</td>
                     <td>{{movement.moneda_from}}</td>
-                    <td>{{(movement.cantidad_from)}}</td>
+                    <td>{{"{:,.2f}".format(movement.cantidad_from)}}</td>
                     <td>{{movement.moneda_to}}</td>
-                    <td>{{(movement.cantidad_to)}}</td>
-                    <td>{{(movement.cantidad_from / movement.cantidad_to)}}</td>
+                    <td>{{"{:,.5f}".format (movement.cantidad_to)}}</td>
+                    <td>{{"{:,.5f}".format(movement.cantidad_from / movement.cantidad_to)}}</td>
     
                 </tr>
                 {% endfor %}
@@ -36,13 +36,14 @@
                 <tr>
                     <td colspan="7" class="lista-vacia">NO HAY MOVIMIENTOS QUE MOSTRAR</td>
                 </tr>
-                {% endif %}
+                {%endif%}
+                
                 
                 
             </tbody>
             
         </table>
-        <a href="/status"><button class="boton_status"method="POST">Status</button></a>
+        <a href="/status"><button class ="status" method="POST">status</button></a>
         <a href="/purchase"><button class="comprar" method="POST">comprar</button></a>  
 
 {% endblock %}

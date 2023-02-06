@@ -31,36 +31,36 @@ class conecSqlite :
     
     
      def consultaConParametros(self, consulta, params):
-        conexion = sqlite3.connect(self.ruta)
-        cursor = conexion.cursor()
+        con = sqlite3.connect(self.ruta)
+        cur = con.cursor()
         resultado = False
         try:
-            cursor.execute(consulta, params)
-            conexion.commit()
+            cur.execute(consulta, params)
+            con.commit()
             resultado = True
         except Exception as error:
             print("ERROR SQLITE:", error)
-            conexion.rollback()
-        conexion.close()
+            con.rollback()
+        con.close()
 
         return resultado
 
      def consultar_saldo(self, consulta):
-        conexion = sqlite3.connect(self.ruta)
-        cursor = conexion.cursor()
-        cursor.execute(consulta)
-        datos = cursor.fetchone()
-        conexion.commit()
-        conexion.close()
+        con = sqlite3.connect(self.ruta)
+        cur = con.cursor()
+        cur.execute(consulta)
+        datos = cur.fetchone()
+        con.commit()
+        con.close()
         return datos
 
      def total_euros_invertidos(self, consulta):
-        conexion = sqlite3.connect(self.ruta)
-        cursor = conexion.cursor()
-        cursor.execute(consulta)
-        datos = cursor.fetchall()
-        conexion.commit()
-        conexion.close()
+        con = sqlite3.connect(self.ruta)
+        cur = con.cursor()
+        cur.execute(consulta)
+        datos = cur.fetchall()
+        con.commit()
+        con.close()
         return datos
 
      def calcular_saldo(self, monedas):
@@ -107,11 +107,11 @@ class Consulta_monedas :
        
         
     def consulta_cambio(self):
-        cabecera = {
+        headers = {
             "X-CoinAPI-Key": apikey
         }
         url = f"http://rest.coinapi.io/v1/exchangerate/{self.moneda_from}/{self.moneda_to}"
-        respuesta = requests.get(url, headers=cabecera)
+        respuesta = requests.get(url, headers=headers)
 
         if respuesta.status_code == 200:
             self.cambio = respuesta.json()["rate"]
@@ -121,15 +121,6 @@ class Consulta_monedas :
             raise APIError(respuesta.status_code)
                     
 
-    
-    def actualizar_cambio (self,apikey) :
-     r = requests.get(f"https://rest.coinapi.io/v1/exchangerate/{self.moneda_from}/EUR?apikey={apikey}")
-     resultado = r.json()  
-     if r.status_code == 200:
-        self.rate = resultado ['rate'] 
-        self.time = resultado ['time'] 
-     else:
-         raise APIError(r.status_code)
      
 def consulta_saldo(crypto):
         cryptosMonedas = {}
@@ -147,7 +138,7 @@ def consulta_saldo(crypto):
 def consulta_valor():    
         total = 0
         monedas_disponibles = ["BTC", "EUR", "ETH", "XRP", "SOL","BNB","ADA","DOT","USDT","MATIC"]
-        monederoActual = consulta_saldo (monedas_disponibles)
+        monederoActual = consulta_saldo(monedas_disponibles)
         url = requests.get(f"https://rest.coinapi.io/v1/exchangerate/EUR?&apikey={apikey}")
         
         if url.status_code != 200:
@@ -155,9 +146,9 @@ def consulta_valor():
         
         resultado = url.json()
 
-        for a in monederoActual.keys():
-            for b in resultado['rates']:
-                if b['asset_id_quote'] == a:
-                    total += 1/b['rate'] * monederoActual[a]
+        for i in monederoActual.keys():
+            for e in resultado['rates']:
+                if e['asset_id_quote'] == i:
+                    total += 1/e['rate'] * monederoActual[i]
                     
         return total 

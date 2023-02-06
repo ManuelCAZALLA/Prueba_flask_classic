@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block section %}
+<table>
+    <div class = "h2">
+        <h2>ESTADO DE SU INVERSION</h2>
+
+        {% if errores %}
+        <div class="lista-errores">
+          
+          <div>
+            {% for error in errores %}
+            <p>{{ error }}</p>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+        
+        <form class="status" action="/purchase" method="GET">
+          <div class="grid">
+            Invertido: {{total_euros_invertidos}} 
+          </div>
+
+          <div class="grid">
+            Recuperado: {{recuperado}} 
+          </div>
+
+          <div class="grid">
+            Valor de compra: {{saldo_euros_invertidos}} 
+          </div>
+          
+          <div class="grid">
+
+            Valor Actual: {{valor_actual}}
+          </div>  
+          
+          <div class="grid">
+          {% if ganancia %}
+            {% if ganancia > 0 %}
+
+            <p> Ganancia / Perdida: <span id = ganancia>{{ ganancia }}</span></p>
+
+            {% elif ganancia == 0 %}
+            <p> Ganancia / Perdida: <span id = igual>{{ ganancia }}</span></p>
+
+            {% else %}
+            <p> Ganancia / Perdida: <span id = perdida>{{ ganancia }}</span></p>
+
+            {% endif %}
+          {% endif %}
+
+          
+          </div>
+                   
+          <div class="boton_volver">
+              <a href="/" role="button">Volver</a>
+          </div>
+        
+        </form>
+
+</table>
+
+{% endblock %}
