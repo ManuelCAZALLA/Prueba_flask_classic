@@ -23,7 +23,6 @@ pip install -r requierements.txt
 ### 4. Obtener la apikey 
 - Visite la pagina CoinApi para obtener su APIkey
 
-poner su apikey.
 ### 5. Base de datos
 - Crear base de datos "movimientos" utilizando movimientos_create que se encuentra en el directorio data.
 

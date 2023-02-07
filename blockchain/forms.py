@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import HiddenField,DateField,TimeField,SelectField,FloatField,SubmitField
-from wtforms.validators import DataRequired,ValidationError
+from wtforms.validators import DataRequired,ValidationError,NumberRange
 
 #monedas_disponibles = ["BTC", "EUR", "ETH", "XRP", "SOL","BNB","ADA","DOT","USDT","MATIC"]
 
@@ -19,7 +19,8 @@ class MovementForm(FlaskForm):
         ("EUR","EUR"), ("BTC","BTC"), ("ETH","ETH"), ("XRP","XRP"), ("SOL","SOL"),("BNB","BNB"),("DOT","DOT"),("USDT","USDT"),("MATIC","MATIC")], validators=[DataRequired(),validate_monedas])
     
  
-    cantidad_from = FloatField("Q:",validators=[DataRequired(message="La cantidad debe de ser un número positivo y mayor que 0")])
+    cantidad_from = FloatField("Q:",validators=[DataRequired(message="La cantidad debe de ser un número positivo y mayor que 0"),NumberRange(min= 0.0001, max =999999)])
+
 
     consultar = SubmitField("calculate")
 
