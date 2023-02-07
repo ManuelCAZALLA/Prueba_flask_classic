@@ -12,7 +12,7 @@ from config import *
 @app.route("/")
 def index():
     try:
-        sqlite = conecSqlite(ORIGIN_DATA)
+        sqlite = ConecSqlite(ORIGIN_DATA)
         movimientos = sqlite.consultaSqlite("SELECT * from movimientos")
         return render_template("index.html",movements=  movimientos, puntero = "index.html",pageTitle ="movimimentos")
         
@@ -30,7 +30,7 @@ def comprar ():
         return render_template("purchase.html", form=form, puntero="purchase.html",pageTitle = "Comprar")
     else:
         try:
-            form = MovementForm(data=request.form)
+            form = MovementForm(data= request.form)
 
             moneda_from = form.moneda_from.data
             moneda_to = form.moneda_to.data
@@ -43,7 +43,7 @@ def comprar ():
             cantidad_to = cantidad_from * PU
             cantidad_to = float (round(cantidad_to,8))
 
-            saldo = conecSqlite(ORIGIN_DATA).calcular_saldo(moneda_from)
+            saldo = ConecSqlite(ORIGIN_DATA).calcular_saldo(moneda_from)
             if moneda_from != "EUR" and saldo < float(cantidad_from):
                 flash(f"No tienes monedas suficientes {moneda_from} ")
                 return render_template("purchase.html", form=form)
@@ -58,7 +58,7 @@ def comprar ():
         if form.aceptar.data:
             if form.validate():
                 form = MovementForm(data=request.form)
-                sqlite = conecSqlite(ORIGIN_DATA)
+                sqlite = ConecSqlite(ORIGIN_DATA)
                 consulta = "INSERT INTO movimientos (date, time, moneda_from, cantidad_from, moneda_to, cantidad_to) VALUES (?,?,?,?,?,?)"
                 moneda_from = str(form.moneda_from.data)
                 moneda_to = str(form.moneda_to.data)
@@ -72,7 +72,7 @@ def comprar ():
                 resultado = sqlite.consultaConParametros(consulta, params)
 
                 if resultado:
-                    flash("Movimiento actualizado correctamente", category="exito")
+                    flash("Movimiento registrado correctamente", category="exito")
                     return redirect(url_for("index"))
 
                 else:
@@ -87,7 +87,7 @@ def comprar ():
 @app.route("/status",methods = ["GET","POST"])
 def estado():
     try:
-        sqlite = conecSqlite(ORIGIN_DATA)
+        sqlite = ConecSqlite(ORIGIN_DATA)
         euros_to = sqlite.consultar_saldo(
             "SELECT sum(cantidad_to) FROM movimientos WHERE moneda_to='EUR'")
         euros_to = euros_to[0]
@@ -142,10 +142,10 @@ def estado():
             return render_template("status.html", euros_to=euros_to, euros_from=euros_from, total_euros_invertidos=total_euros_invertidos,\
                 saldo_euros_invertidos=saldo_euros_invertidos,recuperado=recuperado,inversion_atrapada=inversion_atrapada,valor_actual=valor_actual,ganancia=ganancia,puntero="status.html")
         except APIError:
-            flash("Error al consultar  STATUS ",
+            flash("Error al consultar el estado de su inversion ",
             category="fallo")
             return render_template("status.html")
     except:
-        flash("No hay movimientos en tu base de datos",
+        flash("No hay movimientos en su base de datos",
             category="fallo")
         return render_template("status.html")

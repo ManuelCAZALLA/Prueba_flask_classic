@@ -1,3 +1,2 @@
 FLASK_APP = Archivo de ejecucion
 FLASK_DEBUG = true | false
-SECRET_KEY = Ingrese su SECRET_KEY

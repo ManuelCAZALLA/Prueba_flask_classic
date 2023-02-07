@@ -3,7 +3,7 @@ from config import apikey,ORIGIN_DATA
 import sqlite3
 
 
-class conecSqlite :
+class ConecSqlite :
      def __init__(self,ORIGIN_DATA):
         self.ruta = ORIGIN_DATA
 

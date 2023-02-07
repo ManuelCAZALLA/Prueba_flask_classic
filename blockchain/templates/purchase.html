@@ -12,7 +12,7 @@
         <div class="grid">
             <div class="moneda_from">
             {{ form.moneda_from.label }}
-            {{ form.moneda_from }}        
+            {{ form.moneda_from}}        
             {% if form.moneda_from.errors %}
                 {% for error in form.moneda_from.errors %}
                     <p class="error">{{ error }}</p>
@@ -50,7 +50,6 @@
         </div>
        
         <div class = "boton-consultar">
-        <a href="consultar">
             <span class="material-symbols-outlined">
                 {{ form.consultar}} 
                 </span>
@@ -73,10 +72,8 @@
             </div>
             
             <div class = "boton-comprar">
-            <a href="comprar">
-                <span class="material-symbols-outlined">
-                    
-                {{ form.aceptar }}
+               <span class="material-symbols-outlined">
+                    {{ form.aceptar }}
                 </span>
             </a>
                 
