@@ -17,8 +17,7 @@ def index():
         return render_template("index.html",movements=  movimientos, puntero = "index.html",pageTitle ="movimimentos")
         
     except:
-        flash("Base de datos no disponible,intentelo más tarde por favor",
-              category="fallo")
+        flash("Base de datos no disponible,intentelo más tarde por favor")
         return render_template("index.html")
 
 
@@ -30,7 +29,7 @@ def comprar ():
         return render_template("purchase.html", form=form, puntero="purchase.html",pageTitle = "Comprar")
     else:
         try:
-            form = MovementForm(data= request.form)
+            form = MovementForm(data=request.form)
 
             moneda_from = form.moneda_from.data
             moneda_to = form.moneda_to.data
@@ -72,14 +71,14 @@ def comprar ():
                 resultado = sqlite.consultaConParametros(consulta, params)
 
                 if resultado:
-                    flash("Movimiento registrado correctamente", category="exito")
+                    flash("Movimiento registrado correctamente")
                     return redirect(url_for("index"))
 
                 else:
                     return render_template("purchase.html", form=form, cantidad_to=cantidad_to, errores=["Algo ha fallado con la conexión en la Base de datos"])
 
             else:
-                return render_template("purchase.html", form=form, cantidad_to=cantidad_to, errores=["Algo ha fallado en la validación de  los datos"])
+                return render_template("purchase.html", form=form, cantidad_to=cantidad_to, errores=["Algo ha fallado en la validación de los datos"])
 
         else:
             return redirect(url_for("comprar"))
@@ -140,12 +139,10 @@ def estado():
             
 
             return render_template("status.html", euros_to=euros_to, euros_from=euros_from, total_euros_invertidos=total_euros_invertidos,\
-                saldo_euros_invertidos=saldo_euros_invertidos,recuperado=recuperado,inversion_atrapada=inversion_atrapada,valor_actual=valor_actual,ganancia=ganancia,puntero="status.html")
+                saldo_euros_invertidos=saldo_euros_invertidos,recuperado=recuperado,inversion_atrapada=inversion_atrapada,valor_actual=valor_actual,ganancia=ganancia,puntero="status.html",pageTitle= "estado")
         except APIError:
-            flash("Error al consultar el estado de su inversion ",
-            category="fallo")
+            flash("Error al consultar el estado de su inversion ")
             return render_template("status.html")
     except:
-        flash("No hay movimientos en su base de datos",
-            category="fallo")
+        flash("No hay movimientos en su base de datos")
         return render_template("status.html")

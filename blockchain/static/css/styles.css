@@ -1,14 +1,14 @@
 header, footer {
     background-color: var(--primary);
     color: var(--primary-inverse);
-    font-size: 1.4em;
+    font-size: 1.3em;
     font-weight: bold;
 }
 
 body {
     min-height: 100vh;
     display: grid;
-    grid-template-rows: auto 10px 1fr auto;
+    grid-template-rows: auto 20px 1fr auto;
     margin: 0;
 }
 
@@ -41,7 +41,7 @@ body {
 }
 
 .grid {
-  color: aliceblue;
+  
     display: flex;
     justify-content:space-between;
     padding: 2 1rem;
@@ -81,14 +81,17 @@ body {
     justify-content: space-between;
     gap: 140px;
     height: 100%;
-    
-    
-    
   }
+    
+  .pu {
+  color: aliceblue;
+    display: flex;
+    justify-content: space-between;
+    gap: 140px;
+    height: 100%;
+    
 
-  
-
-
+} 
 .boton_status {
   display: inline-block;
   height: 45px;

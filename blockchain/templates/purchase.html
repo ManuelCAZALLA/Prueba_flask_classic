@@ -3,7 +3,7 @@
 {% block section %}
 <article data-theme="dark">
     <table>
-    <div class = "h1">    
+    <div class = "h2">    
     <h2>COMPRA DE CRIPTOS</h2>
     </div>
     <form action="/purchase" method="post">
@@ -34,7 +34,7 @@
         <div class="grid"> 
             <div class="quantity_from" >
             {{ form.cantidad_from.label }}
-            {{ form.cantidad_from }}
+            {{ (form.cantidad_from) }}
             {% if form.cantidad_from.errors %}
                 {% for error in form.cantidad_from.errors %}
                     <p class="error">{{ error }}</p>
@@ -57,14 +57,14 @@
        
        
         
-        <div class="grid">
-            <div >
+         <div class="grid">
+            <div class="pu">
             <label for="precio_unitario">P.U: </label>
-            <p class="paper-label"> {{PU}}</p>
+            <p class="paper-label"> {{ PU }}</p>
             
             </div>
-
-        <div>
+        
+       <div>
             <span class="material-symbols-outlined">
                 {{form.borrar }}
                 </span>
@@ -79,12 +79,7 @@
             </a>
                 
         </div>
-
-    
-           
-           
-     
-    </form>
+</form>
     </table>
 </article>
 
