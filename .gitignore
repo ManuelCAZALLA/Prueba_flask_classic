@@ -1,7 +1,7 @@
 env/
 /**__pycache__/
 .vscode/
-config.py/
+config.py
 .pytest_cache/
 .venv
 

@@ -134,7 +134,7 @@ def estado():
             
             inversion_atrapada = suma_valor_to - suma_valor_from
             valor_actual = consulta_valor()
-            valor_actual = round(valor_actual, 8)
+            valor_actual = round(valor_actual,5)
             ganancia = round(valor_actual - saldo_euros_invertidos,2)
             
 
