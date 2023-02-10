@@ -1,3 +1,0 @@
-apikey = "A944BA45-DDE6-427C-AB87-A3C2ED4C0344"
-ORIGIN_DATA = "data/movimientos.sqlite"
-SECRET_KEY = "3l2JFmyF3tAqDBIXc7n0YnKf80uirO33"
