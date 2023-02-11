@@ -30,15 +30,7 @@ body {
 }
 
 
-.number {
-  text-align: right;
-}
 
-.return {
-    display: inline-block;
-    width: 100%;
-    text-align: center;
-}
 
 .grid {
   
@@ -92,27 +84,6 @@ body {
     
 
 } 
-.boton_status {
-  display: inline-block;
-  height: 45px;
-  padding: 0;
-  vertical-align: top;
-  width: 80px;
-  margin-left: -250;
-  margin-top: 100;
-}
-
-.cruz_añadir {
-  display: inline-block;
-  height: 45px;
-  padding: 0;
-  margin-right: 0;
-  width: 100px;
-  margin-left: 920px;
-}
-
-
-
   
 .boton_volver {
   display: inline-block;

@@ -44,7 +44,7 @@ def comprar ():
 
             saldo = ConecSqlite(ORIGIN_DATA).calcular_saldo(moneda_from)
             if moneda_from != "EUR" and saldo < float(cantidad_from):
-                flash(f"No tienes monedas suficientes {moneda_from} ")
+                flash(f"No tienes suficientes monedas de {moneda_from} ")
                 return render_template("purchase.html", form=form)
                 
             if form.consultar.data:
