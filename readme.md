@@ -28,6 +28,6 @@ pip install -r requierements.txt
 
 # Ejecucion de App
 ### Ingrese en consola :
-- export FLASK_APP=main.py
 - flask run
+- SI no funcionase con flask run utilizar este comando antes : export FLASK_APP=main.py
 - En caso de que el puerto 5000 este ocupado ingresar: flask --app main run -p 5001
