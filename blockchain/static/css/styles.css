@@ -30,15 +30,6 @@ body {
 }
 
 
-.number {
-  text-align: right;
-}
-
-.return {
-    display: inline-block;
-    width: 100%;
-    text-align: center;
-}
 
 .grid {
   
@@ -84,7 +75,7 @@ body {
   }
     
   .pu {
-  color: aliceblue;
+    color: aliceblue;
     display: flex;
     justify-content: space-between;
     gap: 140px;
@@ -92,16 +83,6 @@ body {
     
 
 } 
-.boton_status {
-  display: inline-block;
-  height: 45px;
-  padding: 0;
-  vertical-align: top;
-  width: 80px;
-  margin-left: -250;
-  margin-top: 100;
-}
-
   
 .boton_volver {
   display: inline-block;
@@ -113,10 +94,6 @@ body {
   margin-top: 50;
   
 }
-
-
-
-
 
 .lista-errores {
   background-color: rgba(200, 0, 0, .25);
@@ -132,10 +109,9 @@ body {
   color: green;
 }
 
-#perdida {
-  color: red
-}
-
 #igual {
   color: orange;
+}
+#perdida {
+  color: red
 }
