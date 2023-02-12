@@ -3,7 +3,7 @@
 Aplicacion web con la que podra simular la compra/venta de criptomonedas,registro de inversiones y el estado de nuestra inversion
 
 # Instalacion
-### 1. Crear y activar de entorno virtual :
+### 1. Crear y activar el entorno virtual :
 - En windows python -m venv nombre del entorno virtual y en mac/linux python3 -m venv nombre del entorno virtual
 -  Activar entorno en mac/linux : source/nombre del entorno virtual/bin/activate
 - Activar en windows : nombre del entorno virtual\Scripts\activate

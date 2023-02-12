@@ -122,7 +122,7 @@ class Consulta_monedas :
                     
 
      
-def consulta_saldo(crypto):
+def consulta_saldo_cripto(crypto):
         cryptosMonedas = {}
         conn= sqlite3.connect(ORIGIN_DATA)
         cur = conn.cursor()
@@ -138,7 +138,7 @@ def consulta_saldo(crypto):
 def consulta_valor():    
         total = 0
         monedas_disponibles = ["BTC", "EUR", "ETH", "XRP", "SOL","BNB","ADA","DOT","USDT","MATIC"]
-        monederoActual = consulta_saldo(monedas_disponibles)
+        monederoActual = consulta_saldo_cripto(monedas_disponibles)
         url = requests.get(f"https://rest.coinapi.io/v1/exchangerate/EUR?&apikey={apikey}")
         
         if url.status_code != 200:
