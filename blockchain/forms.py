@@ -21,7 +21,7 @@ class MovementForm(FlaskForm):
         ("EUR","EUR"), ("BTC","BTC"), ("ETH","ETH"), ("XRP","XRP"), ("SOL","SOL"),("BNB","BNB"),("DOT","DOT"),("USDT","USDT"),("MATIC","MATIC")], validators=[DataRequired(),validate_monedas_diferentes])
     
  
-    cantidad_from = FloatField("Q:",validators=[DataRequired(message="La cantidad debe de ser un número positivo y mayor que 0"),NumberRange(min= 0.1,max= 99999999)])
+    cantidad_from = FloatField("Q:",validators=[DataRequired(message="La cantidad debe de ser un número positivo y mayor que 0"),NumberRange(min= 0.000001,max= 99999999)])
     
     
     consultar = SubmitField("calculate")
